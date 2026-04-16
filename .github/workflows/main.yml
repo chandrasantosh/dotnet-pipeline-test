@@ -15,22 +15,16 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '6.0.x'
+          dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: |
-          files=$(find . -name "*.csproj")
-          dotnet restore $files
+        run: dotnet restore unit-testing-using-dotnet-test.sln
 
       - name: Build
-        run: |
-          files=$(find . -name "*.csproj")
-          dotnet build $files --configuration Release --no-restore
+        run: dotnet build unit-testing-using-dotnet-test.sln --configuration Release --no-restore
 
       - name: Test
-        run: |
-          files=$(find . -name "*.csproj")
-          dotnet test $files --logger "trx"
+        run: dotnet test unit-testing-using-dotnet-test.sln --logger "trx"
 
       - name: TODO Deployment
         run: echo "TODO – Deployment"
