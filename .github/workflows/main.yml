@@ -12,7 +12,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Debug - list files
+      - name: Check files
         run: ls -R
 
       - name: Setup .NET
@@ -21,13 +21,13 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore ./unit-testing-using-dotnet-test.sln
+        run: dotnet restore unit-testing-using-dotnet-test.sln
 
       - name: Build
-        run: dotnet build ./unit-testing-using-dotnet-test.sln --configuration Release --no-restore
+        run: dotnet build unit-testing-using-dotnet-test.sln --configuration Release
 
       - name: Test
-        run: dotnet test ./unit-testing-using-dotnet-test.sln --logger "trx"
+        run: dotnet test unit-testing-using-dotnet-test.sln --logger "trx"
 
       - name: TODO Deployment
         run: echo "TODO – Deployment"
