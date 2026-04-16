@@ -9,22 +9,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '6.0.x'
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
 
-    - name: Restore dependencies
-      run: dotnet restore **/*.csproj
+      - name: Restore dependencies
+        run: |
+          files=$(find . -name "*.csproj")
+          dotnet restore $files
 
-    - name: Build
-      run: dotnet build **/*.csproj --configuration Release --no-restore
+      - name: Build
+        run: |
+          files=$(find . -name "*.csproj")
+          dotnet build $files --configuration Release --no-restore
 
-    - name: Test
-      run: dotnet test **/*.csproj --logger "trx"
+      - name: Test
+        run: |
+          files=$(find . -name "*.csproj")
+          dotnet test $files --logger "trx"
 
-    - name: TODO Deployment
-      run: echo "TODO – Deployment"
+      - name: TODO Deployment
+        run: echo "TODO – Deployment"
