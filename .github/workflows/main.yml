@@ -21,13 +21,13 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore unit-testing-using-dotnet-test.sln
+        run: dotnet restore $(find . -name "*.sln" | head -n 1)
 
       - name: Build
-        run: dotnet build unit-testing-using-dotnet-test.sln --configuration Release
+        run: dotnet build $(find . -name "*.sln" | head -n 1) --configuration Release
 
       - name: Test
-        run: dotnet test unit-testing-using-dotnet-test.sln --logger "trx"
+        run: dotnet test $(find . -name "*.sln" | head -n 1) --logger "trx"
 
       - name: TODO Deployment
         run: echo "TODO – Deployment"
