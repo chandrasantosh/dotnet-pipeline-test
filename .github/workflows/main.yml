@@ -12,22 +12,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Debug - list files
+        run: ls -R
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0.x'
 
-      - name: Find solution file
-        run: find . -name "*.sln"
-
       - name: Restore dependencies
-        run: dotnet restore $(find . -name "*.sln")
+        run: dotnet restore ./unit-testing-using-dotnet-test.sln
 
       - name: Build
-        run: dotnet build $(find . -name "*.sln") --configuration Release --no-restore
+        run: dotnet build ./unit-testing-using-dotnet-test.sln --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test $(find . -name "*.sln") --logger "trx"
+        run: dotnet test ./unit-testing-using-dotnet-test.sln --logger "trx"
 
       - name: TODO Deployment
         run: echo "TODO – Deployment"
