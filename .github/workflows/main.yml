@@ -18,13 +18,13 @@ jobs:
         dotnet-version: '6.0.x'
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ./sample-unit-testing-using-dotnet-test/*.csproj
 
     - name: Build
-      run: dotnet build --no-restore --configuration Release
+      run: dotnet build ./sample-unit-testing-using-dotnet-test/*.csproj --configuration Release --no-restore
 
     - name: Test
-      run: dotnet test --logger "trx"
+      run: dotnet test ./sample-unit-testing-using-dotnet-test/*.csproj --logger "trx"
 
     - name: TODO Deployment
       run: echo "TODO – Deployment"
